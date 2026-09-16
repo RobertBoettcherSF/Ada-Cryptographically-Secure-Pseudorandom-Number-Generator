@@ -68,8 +68,8 @@ private
    type Chacha_Internal_State is array (0 .. 15) of Word;
    
    type Chacha_State is record
-      State     : Chacha_Internal_State := (others => 0);
-      Buffer    : Byte_Array (0 .. 63)  := (others => 0);
+      State     : Chacha_Internal_State := [others => 0];
+      Buffer    : Byte_Array (0 .. 63)  := [others => 0];
       Available : Natural               := 0;
    end record;
 
