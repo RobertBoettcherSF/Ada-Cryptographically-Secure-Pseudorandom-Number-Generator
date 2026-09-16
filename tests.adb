@@ -38,6 +38,7 @@ begin
    begin
       declare
          S : Bbs_State := Bbs_Initialize (5, 11, 4);
+         pragma Unreferenced (S);
       begin
          Check ("2.1 Should not reach here", False);
       end;
@@ -49,6 +50,7 @@ begin
    begin
       declare
          S : Bbs_State := Bbs_Initialize (7, 9, 4);
+         pragma Unreferenced (S);
       begin
          Check ("2.2 Should not reach here", False);
       end;
@@ -60,6 +62,7 @@ begin
    begin
       declare
          S : Bbs_State := Bbs_Initialize (7, 7, 4);
+         pragma Unreferenced (S);
       begin
          Check ("2.3 Should not reach here", False);
       end;
@@ -73,6 +76,7 @@ begin
    begin
       declare
          S : Bbs_State := Bbs_Initialize (7, 11, 0);
+         pragma Unreferenced (S);
       begin
          Check ("3.1 Should not reach here", False);
       end;
@@ -84,6 +88,7 @@ begin
    begin
       declare
          S : Bbs_State := Bbs_Initialize (7, 11, 7);
+         pragma Unreferenced (S);
       begin
          Check ("3.2 Should not reach here", False);
       end;
@@ -95,6 +100,7 @@ begin
    begin
       declare
          S : Bbs_State := Bbs_Initialize (7, 11, 77);
+         pragma Unreferenced (S);
       begin
          Check ("3.3 Should not reach here", False);
       end;
@@ -121,8 +127,8 @@ begin
    -- TEST 5 — ChaCha20 Initialization & Basic Use
    Put_Line ("TEST 5 — ChaCha20 Init");
    declare
-      K : Key_Type := (others => 0);
-      N : Nonce_Type := (others => 0);
+      K : constant Key_Type := [others => 0];
+      N : constant Nonce_Type := [others => 0];
       C : Chacha_State := Chacha_Initialize (K, N);
       B : Byte_Array (1 .. 1);
    begin
@@ -135,8 +141,8 @@ begin
    -- TEST 6 — ChaCha20 Determinism
    Put_Line ("TEST 6 — ChaCha20 Determinism");
    declare
-      K : Key_Type := (others => 1);
-      N : Nonce_Type := (others => 2);
+      K : constant Key_Type := [others => 1];
+      N : constant Nonce_Type := [others => 2];
       C1 : Chacha_State := Chacha_Initialize (K, N);
       C2 : Chacha_State := Chacha_Initialize (K, N);
       B1, B2 : Byte_Array (1 .. 10);
@@ -151,9 +157,9 @@ begin
    -- TEST 7 — ChaCha20 Different Nonce
    Put_Line ("TEST 7 — ChaCha20 Different Nonce");
    declare
-      K  : Key_Type := (others => 1);
-      N1 : Nonce_Type := (0, 0);
-      N2 : Nonce_Type := (0, 1);
+      K  : constant Key_Type := [others => 1];
+      N1 : constant Nonce_Type := [0, 0];
+      N2 : constant Nonce_Type := [0, 1];
       C1 : Chacha_State := Chacha_Initialize (K, N1);
       C2 : Chacha_State := Chacha_Initialize (K, N2);
       B1, B2 : Byte_Array (1 .. 5);
@@ -168,9 +174,9 @@ begin
    -- TEST 8 — ChaCha20 Different Key
    Put_Line ("TEST 8 — ChaCha20 Different Key");
    declare
-      K1 : Key_Type := (others => 1);
-      K2 : Key_Type := (others => 2);
-      N  : Nonce_Type := (0, 0);
+      K1 : constant Key_Type := [others => 1];
+      K2 : constant Key_Type := [others => 2];
+      N  : constant Nonce_Type := [0, 0];
       C1 : Chacha_State := Chacha_Initialize (K1, N);
       C2 : Chacha_State := Chacha_Initialize (K2, N);
       B1, B2 : Byte_Array (1 .. 3);
@@ -185,8 +191,8 @@ begin
    -- TEST 9 — ChaCha20 Multi-Block Traversal (Counter Increments)
    Put_Line ("TEST 9 — ChaCha20 Multi-Block");
    declare
-      K : Key_Type := (others => 0);
-      N : Nonce_Type := (others => 0);
+      K : constant Key_Type := [others => 0];
+      N : constant Nonce_Type := [others => 0];
       C : Chacha_State := Chacha_Initialize (K, N);
       -- 130 bytes spans 3 blocks (64 + 64 + 2)
       B : Byte_Array (1 .. 130);
@@ -200,9 +206,9 @@ begin
    -- TEST 10 — ChaCha20 Reseed Operation
    Put_Line ("TEST 10 — ChaCha20 Reseed");
    declare
-      K1 : Key_Type := (others => 5);
-      K2 : Key_Type := (others => 6);
-      N  : Nonce_Type := (others => 0);
+      K1 : constant Key_Type := [others => 5];
+      K2 : constant Key_Type := [others => 6];
+      N  : constant Nonce_Type := [others => 0];
       C1 : Chacha_State := Chacha_Initialize (K1, N);
       C2 : Chacha_State := Chacha_Initialize (K2, N);
       B1, B2 : Byte_Array (1 .. 10);
@@ -220,8 +226,8 @@ begin
    -- TEST 11 — ChaCha20 Empty Buffer Request
    Put_Line ("TEST 11 — ChaCha20 Empty Buffer");
    declare
-      K : Key_Type := (others => 0);
-      N : Nonce_Type := (others => 0);
+      K : constant Key_Type := [others => 0];
+      N : constant Nonce_Type := [others => 0];
       C : Chacha_State := Chacha_Initialize (K, N);
       Empty : Byte_Array (1 .. 0);
       B     : Byte_Array (1 .. 2);
@@ -237,8 +243,8 @@ begin
    -- TEST 12 — ChaCha20 Exact Block Boundary
    Put_Line ("TEST 12 — ChaCha20 Exact Block Boundary");
    declare
-      K : Key_Type := (others => 3);
-      N : Nonce_Type := (others => 3);
+      K : constant Key_Type := [others => 3];
+      N : constant Nonce_Type := [others => 3];
       C : Chacha_State := Chacha_Initialize (K, N);
       B64 : Byte_Array (1 .. 64);
       B1  : Byte_Array (1 .. 1);
