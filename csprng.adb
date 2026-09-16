@@ -1,5 +1,7 @@
 package body Csprng is
 
+   use type Interfaces.Unsigned_32;
+
    -- Helper: Rotate Left for 32-bit words
    function Rol (Value : Word; Amount : Natural) return Word is
    begin
